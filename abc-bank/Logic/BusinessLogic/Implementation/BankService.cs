@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AbcBank.Data;
+using AbcBank.Models;
 
 namespace AbcBank.Logic.BusinessLogic.Implementation
 {
@@ -18,9 +18,9 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
             bank.AddCustomer(customerService);
         }
 
-        public IList<CustomerSummary> GetCustomerSummaries(BankModel bank)
+        public IList<CustomerSummaryModel> GetCustomerSummaries(BankModel bank)
         {
-            return bank.Customers.Select(i => new CustomerSummary(i.Name, _customerService.GetNumberOfAccounts(i))).ToList();
+            return bank.Customers.Select(i => new CustomerSummaryModel(i.Name, _customerService.GetNumberOfAccounts(i))).ToList();
         }
 
         public double TotalInterestPaid(BankModel bank)

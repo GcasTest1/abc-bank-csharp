@@ -39,22 +39,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\AccountModel.cs" />
+    <Compile Include="Logic\BusinessLogic\ITransactionModelFactory.cs" />
+    <Compile Include="Logic\Presentation\IBankPresenter.cs" />
+    <Compile Include="Logic\Presentation\Implementation\BankPresenter.cs" />
+    <Compile Include="Logic\Presentation\IStatementPresenter.cs" />
+    <Compile Include="Logic\Presentation\Implementation\StatementPresenter.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Logic\BusinessLogic\Implementation\AccountService.cs" />
     <Compile Include="Enums\AccountType.cs" />
-    <Compile Include="Data\BankModel.cs" />
+    <Compile Include="Models\BankModel.cs" />
     <Compile Include="Logic\BusinessLogic\Implementation\BankService.cs" />
-    <Compile Include="Data\CustomerModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Logic\BusinessLogic\Implementation\CustomerService.cs" />
     <Compile Include="DateProvider.cs" />
-    <Compile Include="Data\CustomerSummary.cs" />
+    <Compile Include="Models\CustomerSummaryModel.cs" />
     <Compile Include="Logic\BusinessLogic\ICustomerService.cs" />
     <Compile Include="Logic\BusinessLogic\IAccountService.cs" />
     <Compile Include="Logic\BusinessLogic\IBankService.cs" />
-    <Compile Include="Logic\Presentation\BankPresenter.cs" />
-    <Compile Include="Logic\Presentation\StatementPresenter.cs" />
+    <Compile Include="Logic\BusinessLogic\Implementation\TransactionModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\TransactionModel.cs" />
+    <Compile Include="Models\TransactionModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AbcBank.Data
+namespace AbcBank.Models
 {
     public class BankModel
     {

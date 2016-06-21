@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using AbcBank.Enums;
 
-namespace AbcBank.Data
+namespace AbcBank.Models
 {
     public class AccountModel
     {

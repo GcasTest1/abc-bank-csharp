@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AbcBank.Data;
+using AbcBank.Models;
 
-namespace AbcBank.Logic.Presentation
+namespace AbcBank.Logic.Presentation.Implementation
 {
-    public class BankPresenter
+    public class BankPresenter : IBankPresenter
     {
-        public string ToString(IEnumerable<CustomerSummary> customerSummaries)
+        public string ToString(IEnumerable<CustomerSummaryModel> customerSummaries)
         {
             var sb = new StringBuilder();
             sb.Append("Customer Summary");

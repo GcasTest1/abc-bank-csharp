@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AbcBank.Data;
 using AbcBank.Enums;
-using AbcBank.Logic.BusinessLogic.Implementation;
+using AbcBank.Logic.BusinessLogic;
+using AbcBank.Models;
 
-namespace AbcBank.Logic.Presentation
+namespace AbcBank.Logic.Presentation.Implementation
 {
-    public class StatementPresenter
+    public class StatementPresenter : IStatementPresenter
     {
-        private readonly AccountService _accountService = new AccountService();
+        private readonly IAccountService _accountService;
+
+        public StatementPresenter(IAccountService accountService)
+        {
+            _accountService = accountService;
+        }
 
         public string GetStatement(CustomerModel customer)
         {

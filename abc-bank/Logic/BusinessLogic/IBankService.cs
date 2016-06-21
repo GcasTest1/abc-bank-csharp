@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using AbcBank.Data;
+using AbcBank.Models;
 
 namespace AbcBank.Logic.BusinessLogic
 {
     public interface IBankService
     {
         void AddCustomer(BankModel bank, CustomerModel customerService);
-        IList<CustomerSummary> GetCustomerSummaries(BankModel bank);
+        IList<CustomerSummaryModel> GetCustomerSummaries(BankModel bank);
         double TotalInterestPaid(BankModel bank);
     }
 }

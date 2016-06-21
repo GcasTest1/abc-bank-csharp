@@ -1,5 +1,5 @@
-﻿using AbcBank.Data;
-using AbcBank.Logic.BusinessLogic.Implementation;
+﻿using AbcBank.Logic.BusinessLogic.Implementation;
+using AbcBank.Models;
 
 namespace AbcBank.Logic.BusinessLogic
 {

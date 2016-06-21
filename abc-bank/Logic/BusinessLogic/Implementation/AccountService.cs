@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AbcBank.Data;
 using AbcBank.Enums;
+using AbcBank.Models;
 
 namespace AbcBank.Logic.BusinessLogic.Implementation
 {
     public class AccountService : IAccountService
     {
+        private readonly ITransactionModelFactory _transactionModelFactory;
+
+        public AccountService(ITransactionModelFactory transactionModelFactory)
+        {
+            _transactionModelFactory = transactionModelFactory;
+        }
+
         public AccountService Deposit(AccountModel account, double amount)
         {
             if (amount <= 0) {
                 throw new ArgumentException("amount must be greater than zero");
             }
 
-            account.AddTransaction(new TransactionModel(amount));
+            account.AddTransaction(_transactionModelFactory.CreateTransactionModel(amount));
             return this;
         }
 
@@ -24,7 +31,7 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
                 throw new ArgumentException("amount must be greater than zero");
             }
 
-            account.AddTransaction(new TransactionModel(-amount));
+            account.AddTransaction(_transactionModelFactory.CreateTransactionModel(-amount));
             return this;
         }
 
@@ -37,11 +44,9 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
                         return amount * 0.001;
                     return 1 + (amount-1000) * 0.002;
                 case AccountType.MaxiSavings:
-                    if (amount <= 1000)
-                        return amount * 0.02;
-                    if (amount <= 2000)
-                        return 20 + (amount-1000) * 0.05;
-                    return 70 + (amount-2000) * 0.1;
+                    if (account.Transactions.Any(i => i.Amount < 0 && i.Date >= DateTime.Now.AddDays(-10)))
+                        return amount * 0.001;
+                    return amount * 0.05;
                 case AccountType.Checking:
                     return amount * 0.001;
                 default:
@@ -51,6 +56,12 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
 
         public double SumTransactions(IEnumerable<TransactionModel> transactions) {
            return transactions.Sum(t => t.Amount);
+        }
+
+        public void Transfer(AccountModel sourceAccount, AccountModel destAccount, double amount)
+        {
+            Withdraw(sourceAccount, amount);
+            Deposit(destAccount, amount);
         }
     }
 }

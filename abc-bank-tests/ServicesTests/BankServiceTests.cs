@@ -1,7 +1,7 @@
-﻿using AbcBank.Data;
-using AbcBank.Enums;
+﻿using AbcBank.Enums;
 using AbcBank.Logic.BusinessLogic;
 using AbcBank.Logic.BusinessLogic.Implementation;
+using AbcBank.Models;
 using Moq;
 using NUnit.Framework;
 

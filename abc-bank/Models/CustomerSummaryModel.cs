@@ -1,11 +1,11 @@
-namespace AbcBank.Data
+namespace AbcBank.Models
 {
-    public class CustomerSummary
+    public class CustomerSummaryModel
     {
         public string CustomerName { get; }
         public int NumberOfAccounts { get; }
 
-        public CustomerSummary(string customerName, int numberOfAccounts)
+        public CustomerSummaryModel(string customerName, int numberOfAccounts)
         {
             CustomerName = customerName;
             NumberOfAccounts = numberOfAccounts;

@@ -1,7 +1,9 @@
 ﻿using System;
-using AbcBank.Data;
 using AbcBank.Enums;
+using AbcBank.Logic.BusinessLogic.Implementation;
 using AbcBank.Logic.Presentation;
+using AbcBank.Logic.Presentation.Implementation;
+using AbcBank.Models;
 using NUnit.Framework;
 
 namespace abc_bank_tests.PresentationTests
@@ -21,11 +23,11 @@ namespace abc_bank_tests.PresentationTests
                 var henry = new CustomerModel("Henry");
                 henry.AddAccount(checkingAccount);
                 henry.AddAccount(savingsAccount);
-                checkingAccount.AddTransaction(new TransactionModel(100));
-                savingsAccount.AddTransaction(new TransactionModel(4000.0));
-                savingsAccount.AddTransaction(new TransactionModel(-200));
+                checkingAccount.AddTransaction(new TransactionModel(100, DateTime.Now));
+                savingsAccount.AddTransaction(new TransactionModel(4000.0, DateTime.Now));
+                savingsAccount.AddTransaction(new TransactionModel(-200, DateTime.Now));
 
-                var actual = new StatementPresenter().GetStatement(henry);
+                var actual = new StatementPresenter(new AccountService(null)).GetStatement(henry);
                 string expected = "Statement for Henry" + Environment.NewLine +
                                   Environment.NewLine +
                                   "Checking Account" + Environment.NewLine +

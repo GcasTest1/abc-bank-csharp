@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AbcBank.Data;
 using AbcBank.Logic.Presentation;
+using AbcBank.Logic.Presentation.Implementation;
+using AbcBank.Models;
 using NUnit.Framework;
 
 namespace abc_bank_tests.PresentationTests
@@ -16,10 +17,10 @@ namespace abc_bank_tests.PresentationTests
             [Test]
             public void ReturnsEachCustomerOnANewLine()
             {
-                var customerSummaries = new List<CustomerSummary>
+                var customerSummaries = new List<CustomerSummaryModel>
                 {
-                    new CustomerSummary("John", 1),
-                    new CustomerSummary("Juan", 1)
+                    new CustomerSummaryModel("John", 1),
+                    new CustomerSummaryModel("Juan", 1)
                 };
 
                 var actual = new BankPresenter().ToString(customerSummaries);

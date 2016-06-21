@@ -1,4 +1,5 @@
-﻿using AbcBank.Data;
+﻿using System;
+using AbcBank.Models;
 using NUnit.Framework;
 
 namespace abc_bank_tests
@@ -9,7 +10,7 @@ namespace abc_bank_tests
         [Test]
         public void Transaction()
         {
-            var t = new TransactionModel(5);
+            var t = new TransactionModel(5, DateTime.Now);
             //t instanceOf Transaction
             Assert.IsTrue(t.GetType() == typeof(TransactionModel));
         }
