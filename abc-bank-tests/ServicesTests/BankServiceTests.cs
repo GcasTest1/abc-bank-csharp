@@ -24,7 +24,7 @@ namespace abc_bank_tests.ServicesTests
                 var customerServiceMock = new Mock<ICustomerService>();
                 customerServiceMock.Setup(i => i.GetNumberOfAccounts(john));
 
-                var actual = new BankService(customerServiceMock.Object).GetCustomerSummaries(bank);
+                new BankService(customerServiceMock.Object).GetCustomerSummaries(bank);
                 
                 customerServiceMock.VerifyAll();
             }

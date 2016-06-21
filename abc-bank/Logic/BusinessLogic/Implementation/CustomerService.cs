@@ -5,9 +5,9 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
 {
     public class CustomerService : ICustomerService
     {
-        private readonly AccountService _accountService;
+        private readonly IAccountService _accountService;
 
-        public CustomerService(AccountService accountService)
+        public CustomerService(IAccountService accountService)
         {
             _accountService = accountService;
         }

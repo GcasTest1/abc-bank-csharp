@@ -13,36 +13,35 @@ namespace abc_bank_tests.ServicesTests
         [TestFixture]
         public class OpenAccountMethod
         {
+            private readonly CustomerService _customerService = new CustomerService(new Mock<IAccountService>().Object);
+
             [Test]
             public void TestOneAccount()
             {
-                var customerService = new CustomerService(new Mock<AccountService>().Object);
                 var oscar = new CustomerModel("Oscar");
-                customerService.OpenAccount(oscar, new AccountModel(AccountType.Savings));
-                Assert.AreEqual(1, customerService.GetNumberOfAccounts(oscar));
+                _customerService.OpenAccount(oscar, new AccountModel(AccountType.Savings));
+                Assert.AreEqual(1, _customerService.GetNumberOfAccounts(oscar));
             }
 
             [Test]
             public void TestTwoAccounts()
             {
-                var customerService = new CustomerService(new Mock<AccountService>().Object);
                 var oscar = new CustomerModel("Oscar");
-                customerService
+                _customerService
                     .OpenAccount(oscar, new AccountModel(AccountType.Savings))
                     .OpenAccount(oscar, new AccountModel(AccountType.Checking));
-                Assert.AreEqual(2, customerService.GetNumberOfAccounts(oscar));
+                Assert.AreEqual(2, _customerService.GetNumberOfAccounts(oscar));
             }
 
             [Test]
             public void TestThreeAccounts()
             {
-                var customerService = new CustomerService(new Mock<AccountService>().Object);
                 var oscar = new CustomerModel("Oscar");
-                customerService
+                _customerService
                     .OpenAccount(oscar, new AccountModel(AccountType.Savings))
                     .OpenAccount(oscar, new AccountModel(AccountType.Checking))
                     .OpenAccount(oscar, new AccountModel(AccountType.MaxiSavings));
-                Assert.AreEqual(3, customerService.GetNumberOfAccounts(oscar));
+                Assert.AreEqual(3, _customerService.GetNumberOfAccounts(oscar));
             }
         }
     }
