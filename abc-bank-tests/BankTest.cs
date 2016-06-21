@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using abc_bank;
 
 namespace abc_bank_tests
@@ -8,7 +7,7 @@ namespace abc_bank_tests
     public class BankTest
     {
 
-        private static readonly double DOUBLE_DELTA = 1e-15;
+        private static readonly double DoubleDelta = 1e-15;
 
         [TestMethod]
         public void CustomerSummary() 
@@ -30,7 +29,7 @@ namespace abc_bank_tests
 
             checkingAccount.Deposit(100.0);
 
-            Assert.AreEqual(0.1, bank.totalInterestPaid(), DOUBLE_DELTA);
+            Assert.AreEqual(0.1, bank.TotalInterestPaid(), DoubleDelta);
         }
 
         [TestMethod]
@@ -41,7 +40,7 @@ namespace abc_bank_tests
 
             checkingAccount.Deposit(1500.0);
 
-            Assert.AreEqual(2.0, bank.totalInterestPaid(), DOUBLE_DELTA);
+            Assert.AreEqual(2.0, bank.TotalInterestPaid(), DoubleDelta);
         }
 
         [TestMethod]
@@ -52,7 +51,7 @@ namespace abc_bank_tests
 
             checkingAccount.Deposit(3000.0);
 
-            Assert.AreEqual(170.0, bank.totalInterestPaid(), DOUBLE_DELTA);
+            Assert.AreEqual(170.0, bank.TotalInterestPaid(), DoubleDelta);
         }
     }
 }
