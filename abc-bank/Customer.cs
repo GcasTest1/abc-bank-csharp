@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using AbcBank.Data;
 using AbcBank.Enums;
+using AbcBank.Logic.BusinessLogic;
 
 namespace AbcBank
 {
     public class Customer
     {
         private readonly String _name;
-        private readonly List<Account> _accounts;
+        private readonly List<AccountModel> _accounts;
+        private readonly AccountService _accountService = new AccountService();
 
         public Customer(String name)
         {
             _name = name;
-            _accounts = new List<Account>();
+            _accounts = new List<AccountModel>();
         }
 
         public String GetName()
@@ -20,9 +23,9 @@ namespace AbcBank
             return _name;
         }
 
-        public Customer OpenAccount(Account account)
+        public Customer OpenAccount(AccountModel accountService)
         {
-            _accounts.Add(account);
+            _accounts.Add(accountService);
             return this;
         }
 
@@ -35,7 +38,9 @@ namespace AbcBank
         {
             double total = 0;
             foreach (var a in _accounts)
-                total += a.InterestEarned();
+            {
+                total += _accountService.InterestEarned(a);
+            }
             return total;
         }
 
@@ -43,21 +48,21 @@ namespace AbcBank
         {
             var statement = "Statement for " + _name + "\n";
             var total = 0.0;
-            foreach (var a in _accounts) 
+            foreach (var account in _accounts) 
             {
-                statement += "\n" + StatementForAccount(a) + "\n";
-                total += a.SumTransactions();
+                statement += "\n" + StatementForAccount(account) + "\n";
+                total += _accountService.SumTransactions(account);
             }
             statement += "\nTotal In All Accounts " + ToDollars(total);
             return statement;
         }
 
-        private String StatementForAccount(Account a) 
+        private String StatementForAccount(AccountModel account) 
         {
             var s = "";
 
            //Translate to pretty account type
-            switch(a.GetAccountType()){
+            switch(account.AccountType){
                 case AccountType.Checking:
                     s += "Checking Account\n";
                     break;
@@ -71,7 +76,7 @@ namespace AbcBank
 
             //Now total up all the transactions
             var total = 0.0;
-            foreach (var t in a.Transactions) {
+            foreach (var t in account.Transactions) {
                 s += "  " + (t.Amount < 0 ? "withdrawal" : "deposit") + " " + ToDollars(t.Amount) + "\n";
                 total += t.Amount;
             }

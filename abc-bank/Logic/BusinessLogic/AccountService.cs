@@ -1,42 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
+using AbcBank.Data;
 using AbcBank.Enums;
 
-namespace AbcBank
+namespace AbcBank.Logic.BusinessLogic
 {
-    public class Account
+    public class AccountService
     {
-        private readonly AccountType _accountType;
-        public List<Transaction> Transactions;
-
-        public Account(AccountType accountType) 
-        {
-            _accountType = accountType;
-            Transactions = new List<Transaction>();
-        }
-
-        public void Deposit(double amount) 
+        public void Deposit(AccountModel account, double amount)
         {
             if (amount <= 0) {
                 throw new ArgumentException("amount must be greater than zero");
-            } else {
-                Transactions.Add(new Transaction(amount));
             }
+
+            account.AddTransaction(new Transaction(amount));
         }
 
-        public void Withdraw(double amount) 
+        public void Withdraw(AccountModel account, double amount)
         {
             if (amount <= 0) {
                 throw new ArgumentException("amount must be greater than zero");
-            } else {
-                Transactions.Add(new Transaction(-amount));
             }
+
+            account.AddTransaction(new Transaction(-amount));
         }
 
-        public double InterestEarned() 
+        public double InterestEarned(AccountModel account) 
         {
-            var amount = SumTransactions();
-            switch(_accountType){
+            var amount = SumTransactions(account);
+            switch(account.AccountType){
                 case AccountType.Savings:
                     if (amount <= 1000)
                         return amount * 0.001;
@@ -56,21 +47,21 @@ namespace AbcBank
             }
         }
 
-        public double SumTransactions() {
-           return CheckIfTransactionsExist();
+        public double SumTransactions(AccountModel account) {
+           return CheckIfTransactionsExist(account);
         }
 
-        private double CheckIfTransactionsExist() 
+        private double CheckIfTransactionsExist(AccountModel account) 
         {
             var amount = 0.0;
-            foreach (var t in Transactions)
+            foreach (var t in account.Transactions)
                 amount += t.Amount;
             return amount;
         }
 
-        public AccountType GetAccountType() 
+        public AccountType GetAccountType(AccountModel account) 
         {
-            return _accountType;
+            return account.AccountType;
         }
 
     }

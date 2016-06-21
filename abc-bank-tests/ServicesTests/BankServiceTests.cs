@@ -17,7 +17,7 @@ namespace abc_bank_tests.ServicesTests
             {
                 var bank = new BankModel();
                 var john = new Customer("John");
-                john.OpenAccount(new Account(AccountType.Checking));
+                john.OpenAccount(new AccountModel(AccountType.Checking));
                 bank.AddCustomer(john);
 
                 var actual = new BankService().GetCustomerSummaries(bank);
@@ -34,11 +34,11 @@ namespace abc_bank_tests.ServicesTests
             public void CheckingAccount()
             {
                 var bank = new BankModel();
-                var checkingAccount = new Account(AccountType.Checking);
+                var checkingAccount = new AccountModel(AccountType.Checking);
                 var bill = new Customer("Bill").OpenAccount(checkingAccount);
                 bank.AddCustomer(bill);
 
-                checkingAccount.Deposit(100.0);
+                new AccountService().Deposit(checkingAccount, 100.0);
 
                 Assert.AreEqual(0.1, new BankService().TotalInterestPaid(bank), DoubleDelta);
             }
@@ -47,10 +47,10 @@ namespace abc_bank_tests.ServicesTests
             public void Savings_account()
             {
                 var bank = new BankModel();
-                var checkingAccount = new Account(AccountType.Savings);
+                var checkingAccount = new AccountModel(AccountType.Savings);
                 bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
 
-                checkingAccount.Deposit(1500.0);
+                new AccountService().Deposit(checkingAccount, 1500.0);
 
                 Assert.AreEqual(2.0, new BankService().TotalInterestPaid(bank), DoubleDelta);
             }
@@ -59,10 +59,10 @@ namespace abc_bank_tests.ServicesTests
             public void Maxi_savings_account()
             {
                 var bank = new BankModel();
-                var checkingAccount = new Account(AccountType.MaxiSavings);
+                var checkingAccount = new AccountModel(AccountType.MaxiSavings);
                 bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
 
-                checkingAccount.Deposit(3000.0);
+                new AccountService().Deposit(checkingAccount, 3000.0);
 
                 Assert.AreEqual(170.0, new BankService().TotalInterestPaid(bank), DoubleDelta);
             }

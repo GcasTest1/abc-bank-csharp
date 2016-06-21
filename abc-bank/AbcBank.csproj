@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
+    <Compile Include="Data\AccountModel.cs" />
+    <Compile Include="Logic\BusinessLogic\AccountService.cs" />
     <Compile Include="Enums\AccountType.cs" />
     <Compile Include="Data\BankModel.cs" />
     <Compile Include="Logic\BusinessLogic\BankService.cs" />
