@@ -10,8 +10,8 @@ namespace abc_bank_tests
         [TestMethod]
         public void TestApp()
         {
-            Account checkingAccount = new Account(Account.CHECKING);
-            Account savingsAccount = new Account(Account.SAVINGS);
+            Account checkingAccount = new Account(AccountType.Checking);
+            Account savingsAccount = new Account(AccountType.Savings);
 
             Customer henry = new Customer("Henry").OpenAccount(checkingAccount).OpenAccount(savingsAccount);
 
@@ -36,7 +36,7 @@ namespace abc_bank_tests
         [TestMethod]
         public void TestOneAccount()
         {
-            Customer oscar = new Customer("Oscar").OpenAccount(new Account(Account.SAVINGS));
+            Customer oscar = new Customer("Oscar").OpenAccount(new Account(AccountType.Savings));
             Assert.AreEqual(1, oscar.GetNumberOfAccounts());
         }
 
@@ -44,8 +44,8 @@ namespace abc_bank_tests
         public void TestTwoAccount()
         {
             Customer oscar = new Customer("Oscar")
-                 .OpenAccount(new Account(Account.SAVINGS));
-            oscar.OpenAccount(new Account(Account.CHECKING));
+                 .OpenAccount(new Account(AccountType.Savings));
+            oscar.OpenAccount(new Account(AccountType.Checking));
             Assert.AreEqual(2, oscar.GetNumberOfAccounts());
         }
 
@@ -54,8 +54,8 @@ namespace abc_bank_tests
         public void TestThreeAccounts()
         {
             Customer oscar = new Customer("Oscar")
-                    .OpenAccount(new Account(Account.SAVINGS));
-            oscar.OpenAccount(new Account(Account.CHECKING));
+                    .OpenAccount(new Account(AccountType.Savings));
+            oscar.OpenAccount(new Account(AccountType.Checking));
             Assert.AreEqual(3, oscar.GetNumberOfAccounts());
         }
     }

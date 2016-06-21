@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace abc_bank
 {
@@ -61,13 +58,13 @@ namespace abc_bank
 
            //Translate to pretty account type
             switch(a.GetAccountType()){
-                case Account.CHECKING:
+                case AccountType.Checking:
                     s += "Checking Account\n";
                     break;
-                case Account.SAVINGS:
+                case AccountType.Savings:
                     s += "Savings Account\n";
                     break;
-                case Account.MAXI_SAVINGS:
+                case AccountType.MaxiSavings:
                     s += "Maxi Savings Account\n";
                     break;
             }

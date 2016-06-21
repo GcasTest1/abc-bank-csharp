@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace abc_bank
 {
     public class Account
     {
-
-        public const int CHECKING = 0;
-        public const int SAVINGS = 1;
-        public const int MAXI_SAVINGS = 2;
-
-        private readonly int accountType;
+        private readonly AccountType accountType;
         public List<Transaction> transactions;
 
-        public Account(int accountType) 
+        public Account(AccountType accountType) 
         {
             this.accountType = accountType;
             this.transactions = new List<Transaction>();
@@ -44,7 +36,7 @@ namespace abc_bank
         {
             double amount = sumTransactions();
             switch(accountType){
-                case SAVINGS:
+                case AccountType.Savings:
                     if (amount <= 1000)
                         return amount * 0.001;
                     else
@@ -52,7 +44,7 @@ namespace abc_bank
     //            case SUPER_SAVINGS:
     //                if (amount <= 4000)
     //                    return 20;
-                case MAXI_SAVINGS:
+                case AccountType.MaxiSavings:
                     if (amount <= 1000)
                         return amount * 0.02;
                     if (amount <= 2000)
@@ -75,7 +67,7 @@ namespace abc_bank
             return amount;
         }
 
-        public int GetAccountType() 
+        public AccountType GetAccountType() 
         {
             return accountType;
         }
