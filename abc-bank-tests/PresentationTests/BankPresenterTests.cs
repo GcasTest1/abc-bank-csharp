@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AbcBank.Data;
 using AbcBank.Logic.Presentation;
 using NUnit.Framework;
@@ -22,7 +23,7 @@ namespace abc_bank_tests.PresentationTests
                 };
 
                 var actual = new BankPresenter().ToString(customerSummaries);
-                Assert.AreEqual("Customer Summary\n - John (1 account)\n - Juan (1 account)", actual);
+                Assert.AreEqual("Customer Summary"+ Environment.NewLine + " - John (1 account)" + Environment.NewLine + " - Juan (1 account)", actual);
             }
         }
     }

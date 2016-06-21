@@ -40,14 +40,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AccountModel.cs" />
-    <Compile Include="Logic\BusinessLogic\AccountService.cs" />
+    <Compile Include="Logic\BusinessLogic\Implementation\AccountService.cs" />
     <Compile Include="Enums\AccountType.cs" />
     <Compile Include="Data\BankModel.cs" />
-    <Compile Include="Logic\BusinessLogic\BankService.cs" />
+    <Compile Include="Logic\BusinessLogic\Implementation\BankService.cs" />
     <Compile Include="Data\CustomerModel.cs" />
-    <Compile Include="Logic\BusinessLogic\CustomerService.cs" />
+    <Compile Include="Logic\BusinessLogic\Implementation\CustomerService.cs" />
     <Compile Include="DateProvider.cs" />
     <Compile Include="Data\CustomerSummary.cs" />
+    <Compile Include="Logic\BusinessLogic\ICustomerService.cs" />
+    <Compile Include="Logic\BusinessLogic\IAccountService.cs" />
+    <Compile Include="Logic\BusinessLogic\IBankService.cs" />
     <Compile Include="Logic\Presentation\BankPresenter.cs" />
     <Compile Include="Logic\Presentation\StatementPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

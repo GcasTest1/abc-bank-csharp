@@ -4,9 +4,9 @@ using System.Linq;
 using AbcBank.Data;
 using AbcBank.Enums;
 
-namespace AbcBank.Logic.BusinessLogic
+namespace AbcBank.Logic.BusinessLogic.Implementation
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
         public AccountService Deposit(AccountModel account, double amount)
         {

@@ -1,6 +1,8 @@
 ﻿using AbcBank.Data;
 using AbcBank.Enums;
 using AbcBank.Logic.BusinessLogic;
+using AbcBank.Logic.BusinessLogic.Implementation;
+using Moq;
 using NUnit.Framework;
 
 namespace abc_bank_tests.ServicesTests
@@ -14,7 +16,7 @@ namespace abc_bank_tests.ServicesTests
             [Test]
             public void TestOneAccount()
             {
-                var customerService = new CustomerService();
+                var customerService = new CustomerService(new Mock<AccountService>().Object);
                 var oscar = new CustomerModel("Oscar");
                 customerService.OpenAccount(oscar, new AccountModel(AccountType.Savings));
                 Assert.AreEqual(1, customerService.GetNumberOfAccounts(oscar));
@@ -23,7 +25,7 @@ namespace abc_bank_tests.ServicesTests
             [Test]
             public void TestTwoAccounts()
             {
-                var customerService = new CustomerService();
+                var customerService = new CustomerService(new Mock<AccountService>().Object);
                 var oscar = new CustomerModel("Oscar");
                 customerService
                     .OpenAccount(oscar, new AccountModel(AccountType.Savings))
@@ -34,7 +36,7 @@ namespace abc_bank_tests.ServicesTests
             [Test]
             public void TestThreeAccounts()
             {
-                var customerService = new CustomerService();
+                var customerService = new CustomerService(new Mock<AccountService>().Object);
                 var oscar = new CustomerModel("Oscar");
                 customerService
                     .OpenAccount(oscar, new AccountModel(AccountType.Savings))

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AbcBank.Data;
 using AbcBank.Enums;
-using AbcBank.Logic.BusinessLogic;
+using AbcBank.Logic.BusinessLogic.Implementation;
 
 namespace AbcBank.Logic.Presentation
 {

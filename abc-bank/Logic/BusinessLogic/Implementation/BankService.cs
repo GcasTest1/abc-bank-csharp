@@ -2,11 +2,16 @@
 using System.Linq;
 using AbcBank.Data;
 
-namespace AbcBank.Logic.BusinessLogic
+namespace AbcBank.Logic.BusinessLogic.Implementation
 {
-    public class BankService
+    public class BankService : IBankService
     {
-        private readonly CustomerService _customerService = new CustomerService();
+        private readonly ICustomerService _customerService;
+
+        public BankService(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
 
         public void AddCustomer(BankModel bank, CustomerModel customerService)
         {

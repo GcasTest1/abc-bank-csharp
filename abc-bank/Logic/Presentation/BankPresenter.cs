@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using AbcBank.Data;
 
 namespace AbcBank.Logic.Presentation
 {
     public class BankPresenter
     {
-        public String ToString(IList<CustomerSummary> customerSummaries)
+        public string ToString(IEnumerable<CustomerSummary> customerSummaries)
         {
-            var summary = "Customer Summary";
+            var sb = new StringBuilder();
+            sb.Append("Customer Summary");
             foreach (var c in customerSummaries)
-                summary += "\n - " + c.CustomerName + " (" + Format(c.NumberOfAccounts, "account") + ")";
-            return summary;
+                sb.AppendLine().Append(" - ").Append(c.CustomerName).Append(" (").AppendFormat(Format(c.NumberOfAccounts, "account")).Append(")");
+            return sb.ToString();
         }
 
-        //Make sure correct plural of word is created based on the number passed in:
-        //If number passed in is 1 just return the word otherwise add an 's' at the end
-        private String Format(int number, String word)
+        private string Format(int number, string word)
         {
+            if (word == null) throw new ArgumentNullException(nameof(word));
             return number + " " + (number == 1 ? word : word + "s");
         }
     }
