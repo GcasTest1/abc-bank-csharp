@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AbcBank.Data;
 using AbcBank.Enums;
 
@@ -6,27 +8,29 @@ namespace AbcBank.Logic.BusinessLogic
 {
     public class AccountService
     {
-        public void Deposit(AccountModel account, double amount)
+        public AccountService Deposit(AccountModel account, double amount)
         {
             if (amount <= 0) {
                 throw new ArgumentException("amount must be greater than zero");
             }
 
             account.AddTransaction(new TransactionModel(amount));
+            return this;
         }
 
-        public void Withdraw(AccountModel account, double amount)
+        public AccountService Withdraw(AccountModel account, double amount)
         {
             if (amount <= 0) {
                 throw new ArgumentException("amount must be greater than zero");
             }
 
             account.AddTransaction(new TransactionModel(-amount));
+            return this;
         }
 
         public double InterestEarned(AccountModel account) 
         {
-            var amount = SumTransactions(account);
+            var amount = SumTransactions(account.Transactions);
             switch(account.AccountType){
                 case AccountType.Savings:
                     if (amount <= 1000)
@@ -47,22 +51,8 @@ namespace AbcBank.Logic.BusinessLogic
             }
         }
 
-        public double SumTransactions(AccountModel account) {
-           return CheckIfTransactionsExist(account);
+        public double SumTransactions(IEnumerable<TransactionModel> transactions) {
+           return transactions.Sum(t => t.Amount);
         }
-
-        private double CheckIfTransactionsExist(AccountModel account) 
-        {
-            var amount = 0.0;
-            foreach (var t in account.Transactions)
-                amount += t.Amount;
-            return amount;
-        }
-
-        public AccountType GetAccountType(AccountModel account) 
-        {
-            return account.AccountType;
-        }
-
     }
 }

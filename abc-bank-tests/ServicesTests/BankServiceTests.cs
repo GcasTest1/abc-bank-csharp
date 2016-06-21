@@ -1,5 +1,4 @@
-﻿using AbcBank;
-using AbcBank.Data;
+﻿using AbcBank.Data;
 using AbcBank.Enums;
 using AbcBank.Logic.BusinessLogic;
 using NUnit.Framework;

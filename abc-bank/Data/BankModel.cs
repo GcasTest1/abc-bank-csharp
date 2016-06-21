@@ -6,9 +6,9 @@ namespace AbcBank.Data
     {
         private readonly List<CustomerModel> _customers;
 
-        public IReadOnlyList<CustomerModel> Customers
+        public IEnumerable<CustomerModel> Customers
         {
-            get { return this._customers; }
+            get { return _customers; }
         }
         
         public BankModel()
@@ -18,7 +18,7 @@ namespace AbcBank.Data
 
         public void AddCustomer(CustomerModel customerService)
         {
-            this._customers.Add(customerService);
+            _customers.Add(customerService);
         }
     }
 }

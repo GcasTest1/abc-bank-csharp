@@ -49,6 +49,7 @@
     <Compile Include="DateProvider.cs" />
     <Compile Include="Data\CustomerSummary.cs" />
     <Compile Include="Logic\Presentation\BankPresenter.cs" />
+    <Compile Include="Logic\Presentation\StatementPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\TransactionModel.cs" />
   </ItemGroup>

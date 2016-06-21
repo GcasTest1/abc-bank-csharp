@@ -1,5 +1,4 @@
-﻿using AbcBank;
-using AbcBank.Data;
+﻿using AbcBank.Data;
 using NUnit.Framework;
 
 namespace abc_bank_tests

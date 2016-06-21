@@ -5,14 +5,14 @@ namespace AbcBank.Data
 {
     public class AccountModel
     {
+        private readonly List<TransactionModel> _transactions;
+
         public AccountType AccountType { get; private set; }
 
         public IReadOnlyList<TransactionModel> Transactions
         {
             get { return _transactions; }
         }
-
-        private List<TransactionModel> _transactions { get; }
 
         public AccountModel(AccountType accountType)
         {
