@@ -1,4 +1,4 @@
-namespace abc_bank
+namespace AbcBank.Enums
 {
     public enum AccountType
     {

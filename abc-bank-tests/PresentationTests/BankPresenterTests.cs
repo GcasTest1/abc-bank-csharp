@@ -1,28 +1,33 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using abc_bank;
+﻿using AbcBank;
+using AbcBank.Enums;
+using AbcBank.Logic.BusinessLogic;
+using AbcBank.Logic.Presentation;
+using NUnit.Framework;
 
-namespace abc_bank_tests
+namespace abc_bank_tests.PresentationTests
 {
-    [TestClass]
-    public class BankTest
+    [TestFixture]
+    public class BankPresenterTests
     {
 
         private static readonly double DoubleDelta = 1e-15;
 
-        [TestMethod]
+        [Test]
         public void CustomerSummary() 
         {
-            var bank = new Bank();
+            var bank = new BankService();
             var john = new Customer("John");
             john.OpenAccount(new Account(AccountType.Checking));
             bank.AddCustomer(john);
 
-            Assert.AreEqual("Customer Summary\n - John (1 account)", bank.CustomerSummary());
+            var actual = new BankPresenter().ToString(bank.GetCustomerSummaries());
+            Assert.AreEqual("Customer Summary\n - John (1 account)", actual);
+            //Assert.AreEqual("Customer Summary\n - John (1 account)", abc_bank.BusinessLogic.CustomerSummary());
         }
 
-        [TestMethod]
+        [Test]
         public void CheckingAccount() {
-            var bank = new Bank();
+            var bank = new BankService();
             var checkingAccount = new Account(AccountType.Checking);
             var bill = new Customer("Bill").OpenAccount(checkingAccount);
             bank.AddCustomer(bill);
@@ -32,9 +37,9 @@ namespace abc_bank_tests
             Assert.AreEqual(0.1, bank.TotalInterestPaid(), DoubleDelta);
         }
 
-        [TestMethod]
+        [Test]
         public void Savings_account() {
-            var bank = new Bank();
+            var bank = new BankService();
             var checkingAccount = new Account(AccountType.Savings);
             bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
 
@@ -43,9 +48,9 @@ namespace abc_bank_tests
             Assert.AreEqual(2.0, bank.TotalInterestPaid(), DoubleDelta);
         }
 
-        [TestMethod]
+        [Test]
         public void Maxi_savings_account() {
-            var bank = new Bank();
+            var bank = new BankService();
             var checkingAccount = new Account(AccountType.MaxiSavings);
             bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
 

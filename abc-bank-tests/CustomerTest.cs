@@ -1,12 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using abc_bank;
+﻿using AbcBank;
+using AbcBank.Enums;
+using NUnit.Framework;
 
 namespace abc_bank_tests
 {
-    [TestClass]
+    [TestFixture]
     public class CustomerTest
     {
-        [TestMethod]
+        [Test]
         public void TestApp()
         {
             var checkingAccount = new Account(AccountType.Checking);
@@ -34,14 +35,14 @@ namespace abc_bank_tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void TestOneAccount()
         {
             var oscar = new Customer("Oscar").OpenAccount(new Account(AccountType.Savings));
             Assert.AreEqual(1, oscar.GetNumberOfAccounts());
         }
 
-        [TestMethod]
+        [Test]
         public void TestTwoAccounts()
         {
             var oscar = new Customer("Oscar")
@@ -50,7 +51,7 @@ namespace abc_bank_tests
             Assert.AreEqual(2, oscar.GetNumberOfAccounts());
         }
 
-        [TestMethod]
+        [Test]
         public void TestThreeAccounts()
         {
             var oscar = new Customer("Oscar")

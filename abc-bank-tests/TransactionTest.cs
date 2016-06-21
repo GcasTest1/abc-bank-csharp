@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using abc_bank;
+﻿using AbcBank;
+using NUnit.Framework;
 
 namespace abc_bank_tests
 {
-    [TestClass]
+    [TestFixture]
     public class TransactionTest
     {
-        [TestMethod]
+        [Test]
         public void Transaction()
         {
             var t = new Transaction(5);

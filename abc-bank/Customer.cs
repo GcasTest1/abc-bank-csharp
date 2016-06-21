@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using AbcBank.Enums;
 
-namespace abc_bank
+namespace AbcBank
 {
     public class Customer
     {
