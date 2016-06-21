@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AbcBank.Data;
 
@@ -7,44 +6,19 @@ namespace AbcBank.Logic.BusinessLogic
 {
     public class BankService
     {
-        private readonly List<Customer> _customers;
-
-        public BankService()
+        public void AddCustomer(BankModel bank, Customer customer)
         {
-            _customers = new List<Customer>();
+            bank.AddCustomer(customer);
         }
 
-        public void AddCustomer(Customer customer)
+        public IList<CustomerSummary> GetCustomerSummaries(BankModel bank)
         {
-            _customers.Add(customer);
+            return bank.Customers.Select(i => new CustomerSummary(i.GetName(), i.GetNumberOfAccounts())).ToList();
         }
 
-        public IList<CustomerSummary> GetCustomerSummaries()
+        public double TotalInterestPaid(BankModel bank)
         {
-            return _customers.Select(i => new CustomerSummary(i.GetName(), i.GetNumberOfAccounts())).ToList();
+            return bank.Customers.Sum(c => c.TotalInterestEarned());
         }
-
-        public double TotalInterestPaid()
-        {
-            double total = 0;
-            foreach (var c in _customers)
-                total += c.TotalInterestEarned();
-            return total;
-        }
-
-        public string GetFirstCustomer()
-        {
-            try
-            {
-                return _customers[0].GetName();
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.StackTrace);
-                return "Error";
-            }
-        }
-
-
     }
 }
