@@ -42,7 +42,7 @@ namespace abc_bank_tests
         }
 
         [TestMethod]
-        public void TestTwoAccount()
+        public void TestTwoAccounts()
         {
             var oscar = new Customer("Oscar")
                  .OpenAccount(new Account(AccountType.Savings));
@@ -51,12 +51,12 @@ namespace abc_bank_tests
         }
 
         [TestMethod]
-        [Ignore]
         public void TestThreeAccounts()
         {
             var oscar = new Customer("Oscar")
                     .OpenAccount(new Account(AccountType.Savings));
             oscar.OpenAccount(new Account(AccountType.Checking));
+            oscar.OpenAccount(new Account(AccountType.MaxiSavings));
             Assert.AreEqual(3, oscar.GetNumberOfAccounts());
         }
     }
