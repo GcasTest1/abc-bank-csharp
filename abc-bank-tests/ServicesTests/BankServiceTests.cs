@@ -15,9 +15,10 @@ namespace abc_bank_tests.ServicesTests
             [Test]
             public void ReturnsListOfCurrentCustomers()
             {
+                var customerService = new CustomerService();
                 var bank = new BankModel();
-                var john = new Customer("John");
-                john.OpenAccount(new AccountModel(AccountType.Checking));
+                var john = new CustomerModel("John");
+                customerService.OpenAccount(john, new AccountModel(AccountType.Checking));
                 bank.AddCustomer(john);
 
                 var actual = new BankService().GetCustomerSummaries(bank);
@@ -33,9 +34,11 @@ namespace abc_bank_tests.ServicesTests
             [Test]
             public void CheckingAccount()
             {
+                var customerService = new CustomerService();
                 var bank = new BankModel();
                 var checkingAccount = new AccountModel(AccountType.Checking);
-                var bill = new Customer("Bill").OpenAccount(checkingAccount);
+                var bill = new CustomerModel("Bill");
+                customerService.OpenAccount(bill, checkingAccount);
                 bank.AddCustomer(bill);
 
                 new AccountService().Deposit(checkingAccount, 100.0);
@@ -46,9 +49,12 @@ namespace abc_bank_tests.ServicesTests
             [Test]
             public void Savings_account()
             {
+                var customerService = new CustomerService();
                 var bank = new BankModel();
                 var checkingAccount = new AccountModel(AccountType.Savings);
-                bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
+                var bill = new CustomerModel("Bill");
+                customerService.OpenAccount(bill, checkingAccount);
+                bank.AddCustomer(bill);
 
                 new AccountService().Deposit(checkingAccount, 1500.0);
 
@@ -58,9 +64,12 @@ namespace abc_bank_tests.ServicesTests
             [Test]
             public void Maxi_savings_account()
             {
+                var customerService = new CustomerService();
                 var bank = new BankModel();
                 var checkingAccount = new AccountModel(AccountType.MaxiSavings);
-                bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
+                var bill = new CustomerModel("Bill");
+                customerService.OpenAccount(bill, checkingAccount);
+                bank.AddCustomer(bill);
 
                 new AccountService().Deposit(checkingAccount, 3000.0);
 

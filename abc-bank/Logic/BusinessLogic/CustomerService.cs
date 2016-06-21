@@ -1,54 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using AbcBank.Data;
 using AbcBank.Enums;
-using AbcBank.Logic.BusinessLogic;
 
-namespace AbcBank
+namespace AbcBank.Logic.BusinessLogic
 {
-    public class Customer
+    public class CustomerService
     {
-        private readonly String _name;
-        private readonly List<AccountModel> _accounts;
         private readonly AccountService _accountService = new AccountService();
 
-        public Customer(String name)
+        public CustomerService OpenAccount(CustomerModel customer, AccountModel account)
         {
-            _name = name;
-            _accounts = new List<AccountModel>();
-        }
-
-        public String GetName()
-        {
-            return _name;
-        }
-
-        public Customer OpenAccount(AccountModel accountService)
-        {
-            _accounts.Add(accountService);
+            customer.AddAccount(account);
             return this;
         }
 
-        public int GetNumberOfAccounts()
+        public int GetNumberOfAccounts(CustomerModel customer)
         {
-            return _accounts.Count;
+            return customer.Accounts.Count;
         }
 
-        public double TotalInterestEarned() 
+        public double TotalInterestEarned(CustomerModel customer) 
         {
             double total = 0;
-            foreach (var a in _accounts)
+            foreach (var a in customer.Accounts)
             {
                 total += _accountService.InterestEarned(a);
             }
             return total;
         }
 
-        public String GetStatement() 
+        public String GetStatement(CustomerModel customer) 
         {
-            var statement = "Statement for " + _name + "\n";
+            var statement = "Statement for " + customer.Name + "\n";
             var total = 0.0;
-            foreach (var account in _accounts) 
+            foreach (var account in customer.Accounts) 
             {
                 statement += "\n" + StatementForAccount(account) + "\n";
                 total += _accountService.SumTransactions(account);

@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace AbcBank
+namespace AbcBank.Data
 {
-    public class Transaction
+    public class TransactionModel
     {
         public readonly double Amount;
 
         private DateTime  _transactionDate;
 
-        public Transaction(double amount) 
+        public TransactionModel(double amount) 
         {
             Amount = amount;
             _transactionDate = DateProvider.GetInstance().Now();

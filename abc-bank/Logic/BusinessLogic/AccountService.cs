@@ -12,7 +12,7 @@ namespace AbcBank.Logic.BusinessLogic
                 throw new ArgumentException("amount must be greater than zero");
             }
 
-            account.AddTransaction(new Transaction(amount));
+            account.AddTransaction(new TransactionModel(amount));
         }
 
         public void Withdraw(AccountModel account, double amount)
@@ -21,7 +21,7 @@ namespace AbcBank.Logic.BusinessLogic
                 throw new ArgumentException("amount must be greater than zero");
             }
 
-            account.AddTransaction(new Transaction(-amount));
+            account.AddTransaction(new TransactionModel(-amount));
         }
 
         public double InterestEarned(AccountModel account) 

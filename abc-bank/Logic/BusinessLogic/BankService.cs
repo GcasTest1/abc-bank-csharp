@@ -6,19 +6,21 @@ namespace AbcBank.Logic.BusinessLogic
 {
     public class BankService
     {
-        public void AddCustomer(BankModel bank, Customer customer)
+        private readonly CustomerService _customerService = new CustomerService();
+
+        public void AddCustomer(BankModel bank, CustomerModel customerService)
         {
-            bank.AddCustomer(customer);
+            bank.AddCustomer(customerService);
         }
 
         public IList<CustomerSummary> GetCustomerSummaries(BankModel bank)
         {
-            return bank.Customers.Select(i => new CustomerSummary(i.GetName(), i.GetNumberOfAccounts())).ToList();
+            return bank.Customers.Select(i => new CustomerSummary(i.Name, _customerService.GetNumberOfAccounts(i))).ToList();
         }
 
         public double TotalInterestPaid(BankModel bank)
         {
-            return bank.Customers.Sum(c => c.TotalInterestEarned());
+            return bank.Customers.Sum(customer => _customerService.TotalInterestEarned(customer));
         }
     }
 }
