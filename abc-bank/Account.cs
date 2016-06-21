@@ -61,8 +61,8 @@ namespace abc_bank
 
         private double CheckIfTransactionsExist() 
         {
-            double amount = 0.0;
-            foreach (Transaction t in Transactions)
+            var amount = 0.0;
+            foreach (var t in Transactions)
                 amount += t.Amount;
             return amount;
         }

@@ -12,8 +12,8 @@ namespace abc_bank_tests
         [TestMethod]
         public void CustomerSummary() 
         {
-            Bank bank = new Bank();
-            Customer john = new Customer("John");
+            var bank = new Bank();
+            var john = new Customer("John");
             john.OpenAccount(new Account(AccountType.Checking));
             bank.AddCustomer(john);
 
@@ -22,9 +22,9 @@ namespace abc_bank_tests
 
         [TestMethod]
         public void CheckingAccount() {
-            Bank bank = new Bank();
-            Account checkingAccount = new Account(AccountType.Checking);
-            Customer bill = new Customer("Bill").OpenAccount(checkingAccount);
+            var bank = new Bank();
+            var checkingAccount = new Account(AccountType.Checking);
+            var bill = new Customer("Bill").OpenAccount(checkingAccount);
             bank.AddCustomer(bill);
 
             checkingAccount.Deposit(100.0);
@@ -34,8 +34,8 @@ namespace abc_bank_tests
 
         [TestMethod]
         public void Savings_account() {
-            Bank bank = new Bank();
-            Account checkingAccount = new Account(AccountType.Savings);
+            var bank = new Bank();
+            var checkingAccount = new Account(AccountType.Savings);
             bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
 
             checkingAccount.Deposit(1500.0);
@@ -45,8 +45,8 @@ namespace abc_bank_tests
 
         [TestMethod]
         public void Maxi_savings_account() {
-            Bank bank = new Bank();
-            Account checkingAccount = new Account(AccountType.MaxiSavings);
+            var bank = new Bank();
+            var checkingAccount = new Account(AccountType.MaxiSavings);
             bank.AddCustomer(new Customer("Bill").OpenAccount(checkingAccount));
 
             checkingAccount.Deposit(3000.0);

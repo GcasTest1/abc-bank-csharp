@@ -18,8 +18,8 @@ namespace abc_bank
         }
 
         public String CustomerSummary() {
-            String summary = "Customer Summary";
-            foreach (Customer c in _customers)
+            var summary = "Customer Summary";
+            foreach (var c in _customers)
                 summary += "\n - " + c.GetName() + " (" + Format(c.GetNumberOfAccounts(), "account") + ")";
             return summary;
         }
@@ -33,7 +33,7 @@ namespace abc_bank
 
         public double TotalInterestPaid() {
             double total = 0;
-            foreach(Customer c in _customers)
+            foreach(var c in _customers)
                 total += c.TotalInterestEarned();
             return total;
         }

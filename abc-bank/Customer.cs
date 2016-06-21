@@ -33,7 +33,7 @@ namespace abc_bank
         public double TotalInterestEarned() 
         {
             double total = 0;
-            foreach (Account a in _accounts)
+            foreach (var a in _accounts)
                 total += a.InterestEarned();
             return total;
         }
@@ -41,8 +41,8 @@ namespace abc_bank
         public String GetStatement() 
         {
             var statement = "Statement for " + _name + "\n";
-            double total = 0.0;
-            foreach (Account a in _accounts) 
+            var total = 0.0;
+            foreach (var a in _accounts) 
             {
                 statement += "\n" + StatementForAccount(a) + "\n";
                 total += a.SumTransactions();
@@ -53,7 +53,7 @@ namespace abc_bank
 
         private String StatementForAccount(Account a) 
         {
-            String s = "";
+            var s = "";
 
            //Translate to pretty account type
             switch(a.GetAccountType()){
@@ -69,8 +69,8 @@ namespace abc_bank
             }
 
             //Now total up all the transactions
-            double total = 0.0;
-            foreach (Transaction t in a.Transactions) {
+            var total = 0.0;
+            foreach (var t in a.Transactions) {
                 s += "  " + (t.Amount < 0 ? "withdrawal" : "deposit") + " " + ToDollars(t.Amount) + "\n";
                 total += t.Amount;
             }
