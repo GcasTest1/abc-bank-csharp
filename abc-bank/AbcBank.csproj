@@ -42,7 +42,8 @@
     <Compile Include="Logic\BusinessLogic\Implementation\IntererestCalculation\CalculationResult.cs" />
     <Compile Include="Logic\BusinessLogic\Implementation\IntererestCalculation\CalculationRule.cs" />
     <Compile Include="Logic\BusinessLogic\Implementation\IntererestCalculation\ConfiguredCalculationRulesSingleton.cs" />
-    <Compile Include="Logic\BusinessLogic\Implementation\IntererestCalculation\InterestRateReducers.cs" />
+    <Compile Include="Logic\BusinessLogic\Implementation\IntererestCalculation\DailyInterestRateReducers.cs" />
+    <Compile Include="Logic\BusinessLogic\Implementation\IntererestCalculation\YearlyInterestRateReducers.cs" />
     <Compile Include="Logic\BusinessLogic\ITransactionModelFactory.cs" />
     <Compile Include="Logic\Presentation\IBankPresenter.cs" />
     <Compile Include="Logic\Presentation\Implementation\BankPresenter.cs" />

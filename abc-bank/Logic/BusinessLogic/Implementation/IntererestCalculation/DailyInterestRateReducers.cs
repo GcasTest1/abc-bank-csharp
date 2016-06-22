@@ -5,15 +5,13 @@ using AbcBank.Models;
 
 namespace AbcBank.Logic.BusinessLogic.Implementation.IntererestCalculation
 {
-    public class InterestRateReducers
+    public class DailyInterestRateReducers
     {
-        public static CalculationResult<AccountModel, double> RootBalanceReducer(CalculationResult<AccountModel, double> result)
+        private static int _periods = 365;
+
+        public static CalculationResult<AccountModel, double> RootReducer(CalculationResult<AccountModel, double> input)
         {
-            return new CalculationResult<AccountModel, double>()
-            {
-                Input = result.Input,
-                Result = result.Input.Transactions.Sum(t => t.Amount)
-            };
+            return input;
         }
 
         public static CalculationResult<AccountModel, double> MaxiReducer(CalculationResult<AccountModel, double> input)
@@ -22,23 +20,25 @@ namespace AbcBank.Logic.BusinessLogic.Implementation.IntererestCalculation
                 input.Result = input.Result*0.001;
             else
                 input.Result = input.Result*0.05;
+
+            input.Result = input.Result/365;
             return input;
         }
 
-        public static CalculationResult<AccountModel, double> MaxiSavingRootReducer(CalculationResult<AccountModel, double> result)
+        public static CalculationResult<AccountModel, double> MaxiSavingRootReducer(CalculationResult<AccountModel, double> input)
         {
-            if (result.Input.AccountType == AccountType.MaxiSavings)
-                return result;
+            if (input.Input.AccountType == AccountType.MaxiSavings)
+                return input;
 
-            result.StopProcessingChildren = true;
-            return result;
+            input.StopProcessingChildren = true;
+            return input;
         }
 
         public static CalculationResult<AccountModel, double> SavingBalanceOver1000Reducer(CalculationResult<AccountModel, double> input)
         {
             if (input.Result <= 1000)
                 return input;
-            input.Result = 1 + (input.Result - 1000)*0.002;
+            input.Result = 1 + (input.Result - 1000)*0.002/365;
             return input;
         }
 
@@ -46,7 +46,7 @@ namespace AbcBank.Logic.BusinessLogic.Implementation.IntererestCalculation
         {
             if (input.Result > 1000)
                 return input;
-            input.Result = input.Result*0.001;
+            input.Result = input.Result*0.001/365;
             return input;
         }
 
@@ -66,7 +66,7 @@ namespace AbcBank.Logic.BusinessLogic.Implementation.IntererestCalculation
                 return input;
             }
 
-            input.Result = input.Result*0.001;
+            input.Result = input.Result*0.001/365;
             return input;
         }
     }

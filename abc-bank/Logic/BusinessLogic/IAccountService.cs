@@ -10,6 +10,6 @@ namespace AbcBank.Logic.BusinessLogic
         AccountService Withdraw(AccountModel account, double amount);
         double InterestEarned(AccountModel account);
         double SumTransactions(IEnumerable<TransactionModel> transactions);
-        void Transfer(AccountModel sourceAccount, AccountModel destAccount, double amount);
+        AccountService Transfer(AccountModel sourceAccount, AccountModel destAccount, double amount);
     }
 }
