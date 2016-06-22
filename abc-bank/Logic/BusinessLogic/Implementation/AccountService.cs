@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using AbcBank.Enums;
+using AbcBank.Logic.BusinessLogic.Implementation.IntererestCalculation;
 using AbcBank.Models;
 
 namespace AbcBank.Logic.BusinessLogic.Implementation
@@ -17,7 +19,8 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
 
         public AccountService Deposit(AccountModel account, double amount)
         {
-            if (amount <= 0) {
+            if (amount <= 0)
+            {
                 throw new ArgumentException("amount must be greater than zero");
             }
 
@@ -27,7 +30,8 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
 
         public AccountService Withdraw(AccountModel account, double amount)
         {
-            if (amount <= 0) {
+            if (amount <= 0)
+            {
                 throw new ArgumentException("amount must be greater than zero");
             }
 
@@ -35,33 +39,49 @@ namespace AbcBank.Logic.BusinessLogic.Implementation
             return this;
         }
 
-        public double InterestEarned(AccountModel account) 
+        public double InterestEarned(AccountModel account)
         {
-            var amount = SumTransactions(account.Transactions);
-            switch(account.AccountType){
-                case AccountType.Savings:
-                    if (amount <= 1000)
-                        return amount * 0.001;
-                    return 1 + (amount-1000) * 0.002;
-                case AccountType.MaxiSavings:
-                    if (account.Transactions.Any(i => i.Amount < 0 && i.Date >= DateTime.Now.AddDays(-10)))
-                        return amount * 0.001;
-                    return amount * 0.05;
-                case AccountType.Checking:
-                    return amount * 0.001;
-                default:
-                    throw new ArgumentException("Unrecognized account type.");
-            }
+            return GetInterestCalculationsRules().Calculate(new CalculationResult<AccountModel, double> {Input = account}).Result;
         }
 
-        public double SumTransactions(IEnumerable<TransactionModel> transactions) {
-           return transactions.Sum(t => t.Amount);
+        public double SumTransactions(IEnumerable<TransactionModel> transactions)
+        {
+            return transactions.Sum(t => t.Amount);
         }
 
         public void Transfer(AccountModel sourceAccount, AccountModel destAccount, double amount)
         {
             Withdraw(sourceAccount, amount);
             Deposit(destAccount, amount);
+        }
+
+        //public void Foo(AccountModel account)
+        //{
+        //    var startDay = account.Transactions.Min(i => i.Date).Date;
+        //    var dailySums =
+        //        account.Transactions
+        //            .GroupBy(i => i.Date.Date)
+        //            .Select(i => new {Day = i.Key, Amount = SumTransactions(i) })
+        //            .ToDictionary(i => i.Day);
+
+        //    var balance = 0.0;
+        //    for (var currentDay = startDay.Date; currentDay < DateTime.Now; currentDay = currentDay.AddDays(1))
+        //    {
+        //        if (dailySums.ContainsKey(currentDay))
+        //            balance += dailySums[currentDay].Amount;
+
+        //        var interest = CalculateInterest(account);
+        //    }
+        //}
+
+        //private double CalculateInterest(AccountModel account)
+        //{
+        //    return 0;
+        //}
+
+        protected internal virtual CalculationRule<AccountModel, double> GetInterestCalculationsRules()
+        {
+            return ConfiguredCalculationRulesSingleton.Bar;
         }
     }
 }
