@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace abc_bank
+namespace AbcBank
 {
     public class DateProvider
     {
-        private static DateProvider instance = null;
+        private static DateProvider _instance;
 
-        public static DateProvider getInstance()
+        public static DateProvider GetInstance()
         {
-            if (instance == null)
-                instance = new DateProvider();
-            return instance;
+            return _instance ?? (_instance = new DateProvider());
         }
 
         public DateTime Now()

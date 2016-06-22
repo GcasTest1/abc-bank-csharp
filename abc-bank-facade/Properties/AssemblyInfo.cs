@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AbcBank")]
-[assembly: AssemblyDescription("Luljan Bacaj - abc-bank interview test.")]
+[assembly: AssemblyTitle("abc-bank-facade")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("abc-bank")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyProduct("abc-bank-facade")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3da8700e-2fa4-48d9-b047-6d8e37a7432f")]
+[assembly: Guid("64166bfb-67fe-406b-a65c-2b2fc087ecff")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,6 +33,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
-[assembly:InternalsVisibleTo("abc-bank-tests")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
