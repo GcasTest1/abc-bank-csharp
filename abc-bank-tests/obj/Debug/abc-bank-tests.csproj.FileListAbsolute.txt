@@ -5,3 +5,11 @@ C:\Users\luce\Desktop\abc-bank-master\abc-bank-master\abc-bank-dotnet\abc-bank\a
 C:\Users\luce\Desktop\abc-bank-master\abc-bank-master\abc-bank-dotnet\abc-bank\abc-bank-tests\obj\Debug\abc-bank-tests.csprojResolveAssemblyReference.cache
 C:\Users\luce\Desktop\abc-bank-master\abc-bank-master\abc-bank-dotnet\abc-bank\abc-bank-tests\obj\Debug\abc-bank-tests.dll
 C:\Users\luce\Desktop\abc-bank-master\abc-bank-master\abc-bank-dotnet\abc-bank\abc-bank-tests\obj\Debug\abc-bank-tests.pdb
+C:\abc-bank-csharp-master\abc-bank-tests\bin\Debug\abc-bank-tests.dll
+C:\abc-bank-csharp-master\abc-bank-tests\bin\Debug\abc-bank-tests.pdb
+C:\abc-bank-csharp-master\abc-bank-tests\bin\Debug\abc-bank.dll
+C:\abc-bank-csharp-master\abc-bank-tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\abc-bank-csharp-master\abc-bank-tests\bin\Debug\abc-bank.pdb
+C:\abc-bank-csharp-master\abc-bank-tests\obj\Debug\abc-bank-tests.csprojResolveAssemblyReference.cache
+C:\abc-bank-csharp-master\abc-bank-tests\obj\Debug\abc-bank-tests.dll
+C:\abc-bank-csharp-master\abc-bank-tests\obj\Debug\abc-bank-tests.pdb
