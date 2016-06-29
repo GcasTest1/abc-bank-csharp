@@ -1,62 +1,78 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using abc_bank;
+using abc_bank.Accounts;
+using abc_bank.Enum;
 
 namespace abc_bank_tests
 {
-    [TestClass]
-    public class CustomerTest
+  [TestClass]
+  public class CustomerTest
+  {
+    [TestMethod]
+    public void TestApp()
     {
-        [TestMethod]
-        public void TestApp()
-        {
-            Account checkingAccount = new Account(Account.CHECKING);
-            Account savingsAccount = new Account(Account.SAVINGS);
-
-            Customer henry = new Customer("Henry").OpenAccount(checkingAccount).OpenAccount(savingsAccount);
-
-            checkingAccount.Deposit(100.0);
-            savingsAccount.Deposit(4000.0);
-            savingsAccount.Withdraw(200.0);
-
-            Assert.AreEqual("Statement for Henry\n" +
-                    "\n" +
-                    "Checking Account\n" +
-                    "  deposit $100.00\n" +
-                    "Total $100.00\n" +
-                    "\n" +
-                    "Savings Account\n" +
-                    "  deposit $4,000.00\n" +
-                    "  withdrawal $200.00\n" +
-                    "Total $3,800.00\n" +
-                    "\n" +
-                    "Total In All Accounts $3,900.00", henry.GetStatement());
-        }
-
-        [TestMethod]
-        public void TestOneAccount()
-        {
-            Customer oscar = new Customer("Oscar").OpenAccount(new Account(Account.SAVINGS));
-            Assert.AreEqual(1, oscar.GetNumberOfAccounts());
-        }
-
-        [TestMethod]
-        public void TestTwoAccount()
-        {
-            Customer oscar = new Customer("Oscar")
-                 .OpenAccount(new Account(Account.SAVINGS));
-            oscar.OpenAccount(new Account(Account.CHECKING));
-            Assert.AreEqual(2, oscar.GetNumberOfAccounts());
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void TestThreeAccounts()
-        {
-            Customer oscar = new Customer("Oscar")
-                    .OpenAccount(new Account(Account.SAVINGS));
-            oscar.OpenAccount(new Account(Account.CHECKING));
-            Assert.AreEqual(3, oscar.GetNumberOfAccounts());
-        }
+      Account checkingAccount = AccountFactory.getInstance().GetAccount(AccountType.CHECKING);
+      Account savingsAccount  = AccountFactory.getInstance().GetAccount(AccountType.SAVINGS);
+      Customer henry = new Customer("Henry").OpenAccount(checkingAccount).OpenAccount(savingsAccount);
+      checkingAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.DEPOSIT, 100.0));
+      savingsAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.DEPOSIT, 4000.0));
+      savingsAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.WITHDRAWEL, 200.0));
+      string statement = henry.GetStatement();
+      Assert.IsTrue(statement.Contains("Checking Account  deposit $100.00"));
+      Assert.IsTrue(statement.Contains("Savings Account  deposit $4,000.00"));
+      Assert.IsTrue(statement.Contains("withdrawal $200.00"));
+      Assert.IsTrue(statement.Contains("Total $3,800.00"));
     }
+
+    [TestMethod]
+    public void TestOneAccount()
+    {
+        Customer oscar = new Customer("Oscar").OpenAccount(AccountFactory.getInstance().GetAccount(AccountType.SAVINGS));
+        Assert.AreEqual(1, oscar.GetNumberOfAccounts());
+    }
+
+    [TestMethod]
+    public void TestTwoAccount()
+    {
+        Customer oscar = new Customer("Oscar")
+              .OpenAccount(AccountFactory.getInstance().GetAccount(AccountType.SAVINGS));
+        oscar.OpenAccount(AccountFactory.getInstance().GetAccount(AccountType.CHECKING));
+        Assert.AreEqual(2, oscar.GetNumberOfAccounts());
+    }
+
+    [TestMethod]
+    public void TestThreeAccounts()
+    {
+        Customer oscar = new Customer("Oscar")
+                .OpenAccount(AccountFactory.getInstance().GetAccount(AccountType.SAVINGS));
+        oscar.OpenAccount(AccountFactory.getInstance().GetAccount(AccountType.CHECKING));
+        Assert.AreNotEqual(3, oscar.GetNumberOfAccounts());
+    }
+
+    [TestMethod]
+    public void TestAccountTransfer()
+    {
+      Customer oscar = new Customer("Oscar");
+      Account checkingAccount = AccountFactory.getInstance().GetAccount(AccountType.CHECKING);
+      Account savingsAccount = AccountFactory.getInstance().GetAccount(AccountType.SAVINGS);
+      oscar.OpenAccount(checkingAccount);
+      oscar.OpenAccount(savingsAccount);
+
+      checkingAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.DEPOSIT, 1000));
+      savingsAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.DEPOSIT, 1500));
+      // Transfer Money
+      oscar.Transfer(savingsAccount, checkingAccount, 500);
+      Assert.AreEqual(1500, checkingAccount.SumTransactions());
+
+
+      checkingAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.DEPOSIT, 1000.0));
+      savingsAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.DEPOSIT, 4000.0));
+      savingsAccount.Transactions.Add(TransactionFactory.getInstance().GetTransaction(TransactionType.WITHDRAWEL, 500.0));
+
+
+
+      Assert.AreNotEqual(3, oscar.GetNumberOfAccounts());
+    }
+  }
 }

@@ -2,57 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace abc_bank
 {
-    public class Bank
+  /// <summary>
+  /// Representation for Bank Entity
+  /// </summary>
+  public class Bank
+  {
+    private List<Customer> Customers { get; set; }
+
+    public Bank()
     {
-        private List<Customer> customers;
-
-        public Bank()
-        {
-            customers = new List<Customer>();
-        }
-
-        public void AddCustomer(Customer customer)
-        {
-            customers.Add(customer);
-        }
-
-        public String CustomerSummary() {
-            String summary = "Customer Summary";
-            foreach (Customer c in customers)
-                summary += "\n - " + c.GetName() + " (" + format(c.GetNumberOfAccounts(), "account") + ")";
-            return summary;
-        }
-
-        //Make sure correct plural of word is created based on the number passed in:
-        //If number passed in is 1 just return the word otherwise add an 's' at the end
-        private String format(int number, String word)
-        {
-            return number + " " + (number == 1 ? word : word + "s");
-        }
-
-        public double totalInterestPaid() {
-            double total = 0;
-            foreach(Customer c in customers)
-                total += c.TotalInterestEarned();
-            return total;
-        }
-
-        public String GetFirstCustomer()
-        {
-            try
-            {
-                customers = null;
-                return customers[0].GetName();
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.StackTrace);
-                return "Error";
-            }
-        }
+        this.Customers = new List<Customer>();
     }
+
+    public void AddCustomer(Customer customer)
+    {
+        Customers.Add(customer);
+    }
+
+    public String CustomerSummary() {
+      StringBuilder sb = new StringBuilder();
+      sb.Append("Customer Summary");
+
+      foreach (Customer customer in Customers)
+      {
+        int numberOfAccounts = customer.GetNumberOfAccounts();
+        sb.Append(String.Format("\n - {0} ({1} {2})", customer.Name, numberOfAccounts, numberOfAccounts == 1? "account" : "accounts" ));
+      }
+
+      return sb.ToString();
+    }
+
+    public double totalInterestPaid() {
+        double total = 0;
+        foreach(Customer c in Customers)
+            total += c.TotalInterestEarned();
+        return total;
+    }
+
+    public Customer GetFirstCustomer()
+    {
+      if (Customers == null || Customers.Count == 0)
+        return null;
+
+      return Customers.ElementAt(0);
+    }
+  }
 }
