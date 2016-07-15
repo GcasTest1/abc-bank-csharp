@@ -53,11 +53,20 @@ namespace abc_bank
     //                if (amount <= 4000)
     //                    return 20;
                 case MAXI_SAVINGS:
-                    if (amount <= 1000)
-                        return amount * 0.02;
-                    if (amount <= 2000)
-                        return 20 + (amount-1000) * 0.05;
-                    return 70 + (amount-2000) * 0.1;
+                    //if (amount <= 1000)
+                    //    return amount * 0.02;
+                    //if (amount <= 2000)
+                    //    return 20 + (amount-1000) * 0.05;
+                    //return 70 + (amount-2000) * 0.1;
+
+                    //Query to get list of withdrals in past 10 days. 
+                    IEnumerable<Transaction> withdrawalsInPast10Days = this.transactions.Where(t => (t.amount < 0 && t.TransactionDate > DateTime.Today.AddDays(-10)));
+
+                    List<Transaction> foundTransaction = withdrawalsInPast10Days.ToList();
+                    if (foundTransaction.Count == 0)
+                        return amount * 0.05;
+                    else
+                        return amount * 0.001;
                 default:
                     return amount * 0.001;
             }

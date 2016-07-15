@@ -58,5 +58,26 @@ namespace abc_bank_tests
             oscar.OpenAccount(new Account(Account.CHECKING));
             Assert.AreEqual(3, oscar.GetNumberOfAccounts());
         }
+
+        [TestMethod]
+        public void TestTrasnferBetweenAccounts()
+        {
+
+            Account savingsAccount1 = new Account(Account.SAVINGS);
+            savingsAccount1.Deposit(200);
+
+            Account savingsAccount2 = new Account(Account.SAVINGS);
+            savingsAccount2.Deposit(100);
+
+
+            Customer oscar = new Customer("Oscar")
+                 .OpenAccount(savingsAccount1);
+            oscar.OpenAccount(savingsAccount2);
+
+            oscar.TransferBetweenAccounts(0, 1, 10);
+
+            Assert.AreEqual(190, oscar.GetAccountBlance(0));
+            Assert.AreEqual(110, oscar.GetAccountBlance(1));
+        }
     }
 }

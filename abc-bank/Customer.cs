@@ -86,5 +86,34 @@ namespace abc_bank
         {
             return String.Format("$%,.2f", Math.Abs(d));
         }
+
+        /// <summary>
+        /// Transfer amount between customer account
+        /// </summary>
+        /// <param name="fromAccount">Index of from Account</param>
+        /// <param name="ToAccount">Index of ToAccount</param>
+        /// <param name="amount"></param>
+        public void TransferBetweenAccounts(Int32 fromAccount, Int32 ToAccount, double transferAmount)
+        {
+            if (transferAmount < 0)
+                throw new ArgumentException("Amount has to be > 0");
+
+            //Check enough balance
+            if (this.accounts[fromAccount].sumTransactions() - transferAmount < 0)
+                throw new ArgumentException("Not enough balance, transfer amount too big");
+
+            lock (new object())  //should be atomic transaction. 
+            {
+                this.accounts[fromAccount].Withdraw(transferAmount);
+                this.accounts[ToAccount].Deposit(transferAmount);
+            }
+
+        }
+
+        public double GetAccountBlance(Int32 indexOfAccount)
+        {
+            return this.accounts[indexOfAccount].sumTransactions();
+        }
+
     }
 }
