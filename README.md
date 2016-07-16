@@ -1,6 +1,18 @@
 Programming Test
 ========
 
+Following changes have been made to the code:
+
+
+1. New features have been added :
+		* A customer can transfer between their accounts
+		* Change **Maxi-Savings accounts** to have an interest rate of 5% assuming no withdrawals in the past 10 days otherwise 0.1%
+		* Interest rates should accrue daily (incl. weekends), rates above are per-annum
+		
+2. Code has been refactored to support new feature and address some design issues.
+3. Code and test cases have been modified to remove existing issues.
+
+===================================================================================================================
 This is a dummy application to be used as part of a software development interview.
 
 instructions
