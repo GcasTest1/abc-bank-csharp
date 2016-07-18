@@ -10,6 +10,10 @@ namespace abc_bank
     {
         private static DateProvider instance = null;
 
+        private DateProvider()
+        {
+        }
+
         public static DateProvider getInstance()
         {
             if (instance == null)

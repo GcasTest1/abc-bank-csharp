@@ -15,12 +15,15 @@ namespace abc_bank
             customers = new List<Customer>();
         }
 
-        public void AddCustomer(Customer customer)
+        public Customer AddCustomer(string customerName)
         {
-            customers.Add(customer);
+            Customer newCustomer = new Customer(customerName);
+            customers.Add(newCustomer);
+            return newCustomer;
         }
 
-        public String CustomerSummary() {
+        public String CustomerSummary()
+        {
             String summary = "Customer Summary";
             foreach (Customer c in customers)
                 summary += "\n - " + c.GetName() + " (" + format(c.GetNumberOfAccounts(), "account") + ")";
@@ -41,18 +44,18 @@ namespace abc_bank
             return total;
         }
 
-        public String GetFirstCustomer()
-        {
-            try
-            {
-                customers = null;
-                return customers[0].GetName();
+        //fixed code issue
+        public String GetFirstCustomer(){
+            try{
+                if (customers.Count > 0){
+                    return customers[0].GetName();
+                }
             }
-            catch (Exception e)
-            {
+            catch (Exception e){
                 Console.Write(e.StackTrace);
                 return "Error";
             }
+            return null;
         }
     }
 }

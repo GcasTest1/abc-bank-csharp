@@ -8,12 +8,13 @@ namespace abc_bank
 {
     public class Transaction
     {
+        public readonly int transactionId;
         public readonly double amount;
-
-        private DateTime transactionDate;
+        public readonly DateTime transactionDate;
 
         public Transaction(double amount) 
         {
+            transactionId = IdGenerator.getInstance().GetNextId();
             this.amount = amount;
             this.transactionDate = DateProvider.getInstance().Now();
         }
