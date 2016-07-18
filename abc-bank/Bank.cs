@@ -44,6 +44,7 @@ namespace abc_bank
             return total;
         }
 
+        //fixed code issue
         public String GetFirstCustomer(){
             try{
                 if (customers.Count > 0){

@@ -54,6 +54,10 @@ namespace abc_bank
             }
         }
 
+        /// <summary>
+        /// changed the function to throw an exception in case of insufficient balance
+        /// </summary>
+        /// <param name="amount"></param>
         public void Withdraw(double amount) 
         {
             if (amount <= 0) {

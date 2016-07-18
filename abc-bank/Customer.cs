@@ -31,6 +31,8 @@ namespace abc_bank
             accounts.Add(account.AccountId, account);
             return this;
         }
+
+        //refactored code: overload method to return account type object based on AccountType enum
         public Account OpenAccount(AccountType accountType)
         {
           Account account = null;
@@ -124,6 +126,7 @@ namespace abc_bank
             return s;
         }
 
+        //fixed issue with string format
         private String ToDollars(double d)
         {
            // return String.Format("$%,.2f", Math.Abs(d));
